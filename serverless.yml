@@ -1,0 +1,50 @@
+org: amejia
+app: aws-node-http-api
+service: aws-node-http-api
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: 'us-east-1'
+
+package:
+  individually: true
+  patterns:
+    - '!./**'
+    - README.md
+
+functions:
+
+  getCharacter:
+    handler: getCharacter.getCharacter
+    events:
+      - httpApi:
+          path: /get-character/{characterId}
+          method: get
+    package:
+      patterns:
+        - node_modules/**
+        - package.json
+        - package-lock.json
+        - getCharacter.js
+
+  saveCharacter:
+    handler: saveCharacter.saveCharacter
+    events:
+      - httpApi:
+          path: /save-character
+          method: post
+    package:
+      patterns:
+        - saveCharacter.js
+
+  getSavedCharacters:
+    handler: getSavedCharacters.getSavedCharacters
+    events:
+      - httpApi:
+          path: /get-saved-characters
+          method: get
+    package:
+      patterns:
+        - getSavedCharacters.js
