@@ -33,7 +33,7 @@ resources:
       Properties:
         AttributeDefinitions:
           - AttributeName: characterId
-            AttributeType: S
+            AttributeType: N
         KeySchema:
           - AttributeName: characterId
             KeyType: HASH

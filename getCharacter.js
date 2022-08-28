@@ -5,10 +5,19 @@ const axios = require('axios');
 module.exports.getCharacter = async (event) => {
 
     try {
-        const characterData = await axios.get('https://swapi.py4e.com/api/people/' + event.pathParameters.characterId);
+        const { characterId } = JSON.parse(event.pathParameters);
+        const response = await axios.get('https://swapi.py4e.com/api/people/' + characterId);
+        const { name, url } = response.data;
+
+        const characterData = {
+            id: characterId,
+            nombre: name,
+            url: url
+        }
+
         return {
             statusCode: 200,
-            body: JSON.stringify(characterData.data)
+            body: JSON.stringify(characterData)
         };
     }
 
