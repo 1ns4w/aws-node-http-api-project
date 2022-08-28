@@ -3,8 +3,6 @@
 module.exports.saveCharacter = async (event) => {
     return {
         statusCode: 200,
-        body: JSON.stringify({
-            message: "GET request to /saveCharacter",
-        })
+        body: JSON.stringify(event.body)
     }
 }
