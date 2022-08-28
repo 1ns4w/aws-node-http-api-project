@@ -10,7 +10,7 @@ module.exports.saveCharacter = async (event) => {
     const { id, nombre, url } = JSON.parse(event.body);
 
     const params = {
-        TableName: "CharactersTable",
+        TableName: "characters-table-dev",
         Item: {
             characterId: { N: id },
             name: { S: nombre },
