@@ -63,18 +63,19 @@ functions:
 
   saveCharacter:
     handler: saveCharacter.saveCharacter
-    role: !GetAtt CharactersTable.Arn
     events:
       - httpApi:
           path: /save-character
           method: post
     package:
       patterns:
+        - node_modules/**
+        - package.json
+        - package-lock.json
         - saveCharacter.js
 
   getSavedCharacters:
     handler: getSavedCharacters.getSavedCharacters
-    role: !GetAtt CharactersTable.Arn
     events:
       - httpApi:
           path: /get-saved-characters
