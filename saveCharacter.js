@@ -19,10 +19,12 @@ module.exports.saveCharacter = async (event) => {
     }
 
     try {
-        const result = await ddbClient.send(new PutItemCommand(params));
+        await ddbClient.send(new PutItemCommand(params));
         return {
             statusCode: 200,
-            body: JSON.stringify(result)
+            body: JSON.stringify({
+                message: "Character saved successfully",
+            })
         };
     }
 
