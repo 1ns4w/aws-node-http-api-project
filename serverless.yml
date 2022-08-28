@@ -83,3 +83,6 @@ functions:
     package:
       patterns:
         - getSavedCharacters.js
+        - node_modules/**
+        - package.json
+        - package-lock.json
