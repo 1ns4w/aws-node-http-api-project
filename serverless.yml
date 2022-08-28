@@ -44,45 +44,35 @@ package:
   individually: true
   patterns:
     - '!./**'
-    - README.md
 
 functions:
 
   getCharacter:
-    handler: getCharacter.getCharacter
+    handler: src/functions/getCharacter/getCharacter.getCharacter
     events:
       - httpApi:
           path: /get-character/{characterId}
           method: get
     package:
       patterns:
-        - node_modules/**
-        - package.json
-        - package-lock.json
-        - getCharacter.js
+        - src/functions/getCharacter/**
 
   saveCharacter:
-    handler: saveCharacter.saveCharacter
+    handler: src/functions/saveCharacter/saveCharacter.saveCharacter
     events:
       - httpApi:
           path: /save-character
           method: post
     package:
       patterns:
-        - node_modules/**
-        - package.json
-        - package-lock.json
-        - saveCharacter.js
+        - src/functions/saveCharacter/**
 
   getSavedCharacters:
-    handler: getSavedCharacters.getSavedCharacters
+    handler: src/functions/getSavedCharacters/getSavedCharacters.getSavedCharacters
     events:
       - httpApi:
           path: /get-saved-characters
           method: get
     package:
       patterns:
-        - getSavedCharacters.js
-        - node_modules/**
-        - package.json
-        - package-lock.json
+        - src/functions/getSavedCharacters/**
