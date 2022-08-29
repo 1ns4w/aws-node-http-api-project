@@ -1,3 +1,4 @@
+# replace org, app, and service with your values
 org: amejia
 app: aws-node-http-api
 service: aws-node-http-api
@@ -46,17 +47,6 @@ package:
     - '!./**'
 
 functions:
-
-  getCharacter:
-    handler: src/functions/getCharacter/getCharacter.getCharacter
-    events:
-      - httpApi:
-          path: /get-character/{characterId}
-          method: get
-    package:
-      patterns:
-        - src/functions/getCharacter/**
-
   saveCharacter:
     handler: src/functions/saveCharacter/saveCharacter.saveCharacter
     events:

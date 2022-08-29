@@ -1,37 +1,49 @@
 "use strict"
 
+const axios = require('axios');
 const { DynamoDBClient, PutItemCommand } = require("@aws-sdk/client-dynamodb");
 
 module.exports.saveCharacter = async (event) => {
-    
-    const REGION = "us-east-1";
-    const ddbClient = new DynamoDBClient({ region: REGION });
-
-    const { id, nombre, url } = JSON.parse(event.body);
-
-    const params = {
-        TableName: "characters-table-dev",
-        Item: {
-            characterId: { N: id },
-            name: { S: nombre },
-            url: { S: url }
-        },
-    }
 
     try {
+
+        const REGION = "us-east-1";
+        const ddbClient = new DynamoDBClient({ region: REGION });
+
+        const { id } = JSON.parse(event.body);
+        const response = await axios.get('https://swapi.py4e.com/api/people/' + id);
+        const { name, url } = response.data;
+    
+        const params = {
+            TableName: "characters-table-dev",
+            Item: {
+                characterId: { N: id.toString() },
+                name: { S: name },
+                url: { S: url }
+            },
+        }
+
         await ddbClient.send(new PutItemCommand(params));
+        
         return {
             statusCode: 200,
             body: JSON.stringify({
-                message: "Character saved successfully",
+                data: {
+                    id: id,
+                    nombre: name,
+                    url: url
+                },
+                message: "Character saved successfully"
             })
         };
     }
 
     catch (error) {
         return {
-            statusCode: error.response.status,
-            body: JSON.stringify(error.response.data)
+            statusCode: error.$metadata.httpStatusCode,
+            body: JSON.stringify({
+                message: error.message
+            })
         };
     }
 }
