@@ -47,6 +47,7 @@ $ serverless login
 ```
 $ cd src/functions/saveCharacter
 $ npm install
+$ cd ../../..
 ```
 
 #### Función para obtener los personajes de Star Wars guardados:
@@ -54,15 +55,16 @@ $ npm install
 ```
 $ cd src/functions/getSavedCharacters
 $ npm install
+$ cd ../../..
 ```
-
-Nota: Se debe regresar a la carpeta `aws-node-http-api-project` despues de ejecutar cada comando.
 
 #### Dependencias del proyecto
 
 ```
   $ npm install
 ```
+
+Nota: Se debe estar en la carpeta `aws-node-http-api-project` para ejecutar este comando.
 
 ## Ejecutar el proyecto
 
